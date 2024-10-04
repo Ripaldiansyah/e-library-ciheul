@@ -4,7 +4,9 @@
         "admin/upload_book",
         "admin/edit_book",
         "admin/detail_book",
-        "admin/admin_menu"
+        "admin/admin_menu",
+        "splash",
+        "intro"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

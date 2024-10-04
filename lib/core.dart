@@ -21,4 +21,12 @@ export 'package:e_library_ciheul/module/admin/upload_book/view/upload_book_view.
 export 'package:e_library_ciheul/module/auth/login/controller/login_controller.dart';
 export 'package:e_library_ciheul/module/auth/login/state/login_state.dart';
 export 'package:e_library_ciheul/module/auth/login/view/login_view.dart';
+export 'package:e_library_ciheul/module/intro/controller/intro_controller.dart';
+export 'package:e_library_ciheul/module/intro/state/intro_state.dart';
+export 'package:e_library_ciheul/module/intro/view/intro_view.dart';
+export 'package:e_library_ciheul/module/splash/controller/splash_controller.dart';
+export 'package:e_library_ciheul/module/splash/state/splash_state.dart';
+export 'package:e_library_ciheul/module/splash/view/splash_view.dart';
+export 'package:e_library_ciheul/shared/theme/theme_config.dart';
+export 'package:e_library_ciheul/shared/theme/theme_data.dart';
 export 'package:e_library_ciheul/state_util.dart';

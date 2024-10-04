@@ -18,6 +18,8 @@ import 'module/admin/edit_book/controller/edit_book_controller.dart' as _i539;
 import 'module/admin/upload_book/controller/upload_book_controller.dart'
     as _i518;
 import 'module/auth/login/controller/login_controller.dart' as _i994;
+import 'module/intro/controller/intro_controller.dart' as _i1033;
+import 'module/splash/controller/splash_controller.dart' as _i827;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -30,13 +32,15 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.singleton<_i518.UploadBookController>(
-        () => _i518.UploadBookController());
-    gh.singleton<_i539.EditBookController>(() => _i539.EditBookController());
+    gh.singleton<_i549.AdminMenuController>(() => _i549.AdminMenuController());
     gh.singleton<_i279.DetailBookController>(
         () => _i279.DetailBookController());
-    gh.singleton<_i549.AdminMenuController>(() => _i549.AdminMenuController());
+    gh.singleton<_i539.EditBookController>(() => _i539.EditBookController());
+    gh.singleton<_i518.UploadBookController>(
+        () => _i518.UploadBookController());
     gh.singleton<_i994.LoginController>(() => _i994.LoginController());
+    gh.singleton<_i1033.IntroController>(() => _i1033.IntroController());
+    gh.singleton<_i827.SplashController>(() => _i827.SplashController());
     return this;
   }
 }
