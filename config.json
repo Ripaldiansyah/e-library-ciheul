@@ -6,7 +6,8 @@
         "admin/detail_book",
         "admin/admin_menu",
         "splash",
-        "intro"
+        "intro",
+        "main_navigation"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

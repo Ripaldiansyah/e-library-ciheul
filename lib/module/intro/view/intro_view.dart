@@ -66,7 +66,7 @@ class _IntroViewState extends State<IntroView> {
             children: [
               Expanded(
                 child: Builder(builder: (context) {
-                  List<Map<String, dynamic>> intructionItems = [
+                  List<Map<String, dynamic>> items = [
                     {
                       "photo": "assets/pic1.png",
                       "title": "Membaca dimana saja",
@@ -94,7 +94,7 @@ class _IntroViewState extends State<IntroView> {
                               controller.updateState();
                             },
                           ),
-                          items: intructionItems.map((item) {
+                          items: items.map((item) {
                             return Builder(
                               builder: (BuildContext context) {
                                 double screenWidth =
@@ -146,10 +146,10 @@ class _IntroViewState extends State<IntroView> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: intructionItems.asMap().entries.map((entry) {
+                        children: items.asMap().entries.map((entry) {
                           return GestureDetector(
-                            // onTap: () => controller.carouselController
-                            //     .animateToPage(entry.key),
+                            onTap: () => controller.carouselController
+                                .animateToPage(entry.key),
                             child: Container(
                               width: 12.0,
                               height: 12.0,
@@ -164,9 +164,9 @@ class _IntroViewState extends State<IntroView> {
                                               0.6,
                                             ))
                                       .withOpacity(
-                                          // controller.currentIndex == entry.key
-                                          // ? 0.9
-                                          0.4)),
+                                          controller.currentIndex == entry.key
+                                              ? 0.9
+                                              : 0.4)),
                             ),
                           );
                         }).toList(),
@@ -177,20 +177,21 @@ class _IntroViewState extends State<IntroView> {
                       Row(
                         children: [
                           Expanded(
-                            child: ButtonReusable(),
+                            child: QButton(
+                              label: 'Daftar',
+                              onPressed: () {},
+                              backgroundColor: Colors.black,
+                            ),
                           ),
                           const SizedBox(
                             width: 10.0,
                           ),
                           Expanded(
-                            child: Container(
-                              height: 50,
-                              child: Text(
-                                "text",
-                                style: TextStyle(
-                                  fontSize: 30.0,
-                                ),
-                              ),
+                            child: QButton(
+                              label: "Login",
+                              onPressed: () {
+                                controller.login();
+                              },
                             ),
                           ),
                         ],

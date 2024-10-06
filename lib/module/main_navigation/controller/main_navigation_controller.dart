@@ -1,12 +1,12 @@
-import 'package:e_library_ciheul/core.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../state/login_state.dart';
+import '../state/main_navigation_state.dart';
 import 'package:e_library_ciheul/bloc_util.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
-class LoginController extends Cubit<LoginState> implements IBlocBase {
-  LoginController() : super(LoginState());
+class MainNavigationController extends Cubit<MainNavigationState> implements IBlocBase {
+  MainNavigationController() : super(MainNavigationState());
 
   @override
   void initState() {
@@ -23,7 +23,11 @@ class LoginController extends Cubit<LoginState> implements IBlocBase {
     //ready event
   }
 
-  login() {
-    Get.offAll(MainNavigationView());
+  increment() {
+    state.counter++;
+    emit(state.copyWith());
   }
 }
+    
+      
+    

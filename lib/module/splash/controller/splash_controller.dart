@@ -9,7 +9,7 @@ class SplashController extends Cubit<SplashState> implements IBlocBase {
 
   @override
   void initState() {
-    login();
+    intro();
   }
 
   @override
@@ -22,7 +22,7 @@ class SplashController extends Cubit<SplashState> implements IBlocBase {
     //ready event
   }
 
-  login() {
+  intro() {
     Future.delayed(Duration(seconds: 4), () {
       Get.offAll(IntroView());
     });

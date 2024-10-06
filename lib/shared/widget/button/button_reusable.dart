@@ -2,42 +2,44 @@ import 'package:flutter/material.dart';
 
 import '../../../core.dart';
 
-class ButtonReusable extends StatefulWidget {
-  const ButtonReusable({
+class QButton extends StatefulWidget {
+  const QButton({
     required this.label,
     required this.onPressed,
-    this.color,
-    this.textColor,
+    this.backgroundColor,
+    this.foregroundColor,
   });
 
   final String label;
   final Function onPressed;
-  final Color? color;
-  final Color? textColor;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   @override
-  State<ButtonReusable> createState() => _ButtonReusable();
+  State<QButton> createState() => _ButtonReusable();
 }
 
-class _ButtonReusable extends State<ButtonReusable> {
+class _ButtonReusable extends State<QButton> {
   @override
   Widget build(BuildContext context) {
     var widgetWidth = MediaQuery.of(context).size.width;
     var widgetHeight = 46.0;
-    var widgetFontSize = 16.0;
-
     return SizedBox(
       width: widgetWidth,
       height: widgetHeight,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.all(0),
-          backgroundColor: widget.color ?? primaryColor,
+          backgroundColor: widget.backgroundColor == null
+              ? primaryColor
+              : widget.backgroundColor,
+          foregroundColor: widget.foregroundColor == null
+              ? Colors.white
+              : widget.foregroundColor,
         ),
-        onPressed: () async {
+        onPressed: () {
           widget.onPressed();
         },
-        child: null,
+        child: Text(widget.label),
       ),
     );
   }

@@ -10,9 +10,9 @@ ThemeData defaultTheme() {
     appBarTheme: AppBarTheme(
       elevation: 0.6,
       titleTextStyle: GoogleFonts.poppins(
-        color: textColor,
+        color: Colors.white,
       ),
-      backgroundColor: cardBackground,
+      backgroundColor: primaryColor,
       iconTheme: const IconThemeData(
         color: Colors.white,
       ),
