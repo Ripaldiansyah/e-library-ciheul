@@ -31,6 +31,6 @@ class IntroController extends Cubit<IntroState> implements IBlocBase {
       CarouselSliderController();
 
   login() {
-    Get.to(LoginView());
+    Get.offAll(LoginView());
   }
 }

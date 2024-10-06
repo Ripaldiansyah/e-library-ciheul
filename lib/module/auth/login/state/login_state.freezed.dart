@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  set email(String? value) => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  set password(String? value) => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,7 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({int counter});
+  $Res call({String? email, String? password});
 }
 
 /// @nodoc
@@ -50,13 +52,18 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? email = freezed,
+    Object? password = freezed,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -69,7 +76,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({String? email, String? password});
 }
 
 /// @nodoc
@@ -85,13 +92,18 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? email = freezed,
+    Object? password = freezed,
   }) {
     return _then(_$LoginStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -99,15 +111,18 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginStateImpl implements _LoginState {
-  _$LoginStateImpl({this.counter = 0});
+  _$LoginStateImpl({this.email = null, this.password = null});
 
   @override
   @JsonKey()
-  int counter;
+  String? email;
+  @override
+  @JsonKey()
+  String? password;
 
   @override
   String toString() {
-    return 'LoginState(counter: $counter)';
+    return 'LoginState(email: $email, password: $password)';
   }
 
   /// Create a copy of LoginState
@@ -120,11 +135,14 @@ class _$LoginStateImpl implements _LoginState {
 }
 
 abstract class _LoginState implements LoginState {
-  factory _LoginState({int counter}) = _$LoginStateImpl;
+  factory _LoginState({String? email, String? password}) = _$LoginStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  String? get email;
+  set email(String? value);
+  @override
+  String? get password;
+  set password(String? value);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.

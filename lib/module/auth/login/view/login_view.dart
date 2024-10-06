@@ -1,3 +1,4 @@
+import 'package:e_library_ciheul/shared/theme/theme_config.dart';
 import 'package:e_library_ciheul/shared/util/validator.dart';
 import 'package:e_library_ciheul/shared/widget/button/button_reusable.dart';
 import 'package:e_library_ciheul/shared/widget/textfield/QTextField.dart';
@@ -58,60 +59,148 @@ class _LoginViewState extends State<LoginView> {
     LoginState state,
   ) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Welcome",
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            child: Container(
+              height: MediaQuery.of(context).size.height / 2.5,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: primaryColor,
+              ),
+              child: Image.asset(
+                "assets/pic2.png",
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height / 3.1,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                color: Color(0xfff6f8f6),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0x19000000),
+                    blurRadius: 24,
+                    offset: Offset(0, 11),
+                  ),
+                ],
+              ),
+              child: Text(
+                "Silahkan Login",
                 style: TextStyle(
-                  fontSize: 24.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 20.0,
+            ),
+          ),
+          Positioned(
+            bottom: 1,
+            top: MediaQuery.of(context).size.height / 2.5,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0x19000000),
+                    blurRadius: 100,
+                    offset: Offset(0, 11),
+                  ),
+                ],
               ),
-              Padding(
+              child: Padding(
                 padding: EdgeInsets.all(12.0),
-                child: Form(
-                  key: formKey,
+                child: SingleChildScrollView(
+                  controller: ScrollController(),
                   child: Column(
                     children: [
-                      QTextField(
-                        label: "Email",
-                        validator: Validator.email,
-                        value: null,
-                        onChanged: (value) {},
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            QTextField(
+                              label: "Email",
+                              validator: Validator.email,
+                              value: null,
+                              onChanged: (value) {
+                                state.email = value;
+                              },
+                            ),
+                            QTextField(
+                              label: "Password",
+                              obscure: true,
+                              validator: Validator.required,
+                              suffixIcon: Icons.password,
+                              value: null,
+                              onChanged: (value) {
+                                state.password = value;
+                              },
+                            ),
+                            QButton(
+                              label: "Login",
+                              onPressed: () {
+                                bool isNotValid =
+                                    formKey.currentState!.validate() == false;
+                                if (isNotValid) {
+                                  return;
+                                }
+                                controller.login();
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                      QTextField(
-                        label: "Password",
-                        obscure: true,
-                        validator: Validator.required,
-                        suffixIcon: Icons.password,
-                        value: null,
-                        onChanged: (value) {},
+                      const SizedBox(
+                        height: 10.0,
                       ),
-                      QButton(
-                        label: "Login",
-                        onPressed: () {
-                          bool isNotValid =
-                              formKey.currentState!.validate() == false;
-                          if (isNotValid) {
-                            return;
-                          }
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Belum punya akun ? ",
+                            style: TextStyle(
+                              fontSize: 12.0,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              controller.register();
+                            },
+                            child: Text(
+                              "Daftar sekarang",
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

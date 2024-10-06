@@ -1,4 +1,4 @@
-
+import 'package:e_library_ciheul/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../controller/main_navigation_controller.dart';
@@ -14,6 +14,35 @@ class MainNavigationView extends StatefulWidget {
 
 class _MainNavigationViewState extends State<MainNavigationView> {
   MainNavigationController controller = MainNavigationController();
+  int selectedIndex = 0;
+
+  updateIndex(int newIndex) {
+    selectedIndex = newIndex;
+    setState(() {});
+  }
+
+  List menus = [
+    (
+      icon: Icons.explore_outlined,
+      label: "Explore",
+      iconActive: Icons.explore,
+    ),
+    (
+      icon: Icons.search,
+      label: "Search",
+      iconActive: Icons.search_sharp,
+    ),
+    (
+      icon: Icons.favorite_outline,
+      label: "Favorite",
+      iconActive: Icons.favorite,
+    ),
+    (
+      icon: Icons.person_outline,
+      label: "Profile",
+      iconActive: Icons.person,
+    ),
+  ];
 
   @override
   void initState() {
@@ -56,28 +85,40 @@ class _MainNavigationViewState extends State<MainNavigationView> {
     MainNavigationState state,
   ) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Navigation'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            'Counter: ${state.counter}',
-            style: const TextStyle(fontSize: 24),
+        body: SafeArea(
+      child: DefaultTabController(
+        length: 4,
+        initialIndex: selectedIndex,
+        child: Scaffold(
+          body: IndexedStack(
+            index: selectedIndex,
+            children: [
+              ExploreBookView(),
+              SearchBookView(),
+              FavoriteBookView(),
+              ProfileView(),
+            ],
           ),
-          IconButton(
-            onPressed: () => controller.increment(),
-            icon: const Icon(
-              Icons.add,
-              size: 24.0,
-            ),
-          ),
-        ],
+          bottomNavigationBar: BottomNavigationBar(
+              currentIndex: selectedIndex,
+              onTap: updateIndex,
+              type: BottomNavigationBarType.fixed,
+              items: List.generate(menus.length, (index) {
+                final item = menus[index];
+                return BottomNavigationBarItem(
+                  icon: Icon(
+                    item.icon,
+                    color: Color(0xffa9a8a9),
+                  ),
+                  activeIcon: Icon(
+                    item.iconActive,
+                    color: primaryColor,
+                  ),
+                  label: item.label,
+                );
+              })),
+        ),
       ),
-    );
+    ));
   }
 }
-    
-    

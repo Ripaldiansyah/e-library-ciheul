@@ -174,27 +174,11 @@ class _IntroViewState extends State<IntroView> {
                       const SizedBox(
                         height: 10.0,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: QButton(
-                              label: 'Daftar',
-                              onPressed: () {},
-                              backgroundColor: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10.0,
-                          ),
-                          Expanded(
-                            child: QButton(
-                              label: "Login",
-                              onPressed: () {
-                                controller.login();
-                              },
-                            ),
-                          ),
-                        ],
+                      QButton(
+                        label: "Mulai",
+                        onPressed: () {
+                          controller.login();
+                        },
                       ),
                     ],
                   );

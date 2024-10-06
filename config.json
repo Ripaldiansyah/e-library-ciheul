@@ -1,13 +1,18 @@
 {
     "modules": [
         "auth/login",
+        "auth/register",
         "admin/upload_book",
         "admin/edit_book",
         "admin/detail_book",
         "admin/admin_menu",
         "splash",
         "intro",
-        "main_navigation"
+        "main_navigation",
+        "explore_book",
+        "search_book",
+        "favorite_book",
+        "profile"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,
