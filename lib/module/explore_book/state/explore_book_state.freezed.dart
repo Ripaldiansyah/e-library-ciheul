@@ -16,8 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ExploreBookState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  List<dynamic>? get categories => throw _privateConstructorUsedError;
+  set categories(List<dynamic>? value) => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  set isLoading(bool value) => throw _privateConstructorUsedError;
+  bool get isClicked => throw _privateConstructorUsedError;
+  set isClicked(bool value) => throw _privateConstructorUsedError;
 
   /// Create a copy of ExploreBookState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +36,7 @@ abstract class $ExploreBookStateCopyWith<$Res> {
           ExploreBookState value, $Res Function(ExploreBookState) then) =
       _$ExploreBookStateCopyWithImpl<$Res, ExploreBookState>;
   @useResult
-  $Res call({int counter});
+  $Res call({List<dynamic>? categories, bool isLoading, bool isClicked});
 }
 
 /// @nodoc
@@ -50,13 +54,23 @@ class _$ExploreBookStateCopyWithImpl<$Res, $Val extends ExploreBookState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? categories = freezed,
+    Object? isLoading = null,
+    Object? isClicked = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isClicked: null == isClicked
+          ? _value.isClicked
+          : isClicked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -69,7 +83,7 @@ abstract class _$$ExploreBookStateImplCopyWith<$Res>
       __$$ExploreBookStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({List<dynamic>? categories, bool isLoading, bool isClicked});
 }
 
 /// @nodoc
@@ -85,13 +99,23 @@ class __$$ExploreBookStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? categories = freezed,
+    Object? isLoading = null,
+    Object? isClicked = null,
   }) {
     return _then(_$ExploreBookStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isClicked: null == isClicked
+          ? _value.isClicked
+          : isClicked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -99,15 +123,22 @@ class __$$ExploreBookStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ExploreBookStateImpl implements _ExploreBookState {
-  _$ExploreBookStateImpl({this.counter = 0});
+  _$ExploreBookStateImpl(
+      {this.categories = null, this.isLoading = true, this.isClicked = false});
 
   @override
   @JsonKey()
-  int counter;
+  List<dynamic>? categories;
+  @override
+  @JsonKey()
+  bool isLoading;
+  @override
+  @JsonKey()
+  bool isClicked;
 
   @override
   String toString() {
-    return 'ExploreBookState(counter: $counter)';
+    return 'ExploreBookState(categories: $categories, isLoading: $isLoading, isClicked: $isClicked)';
   }
 
   /// Create a copy of ExploreBookState
@@ -121,11 +152,20 @@ class _$ExploreBookStateImpl implements _ExploreBookState {
 }
 
 abstract class _ExploreBookState implements ExploreBookState {
-  factory _ExploreBookState({int counter}) = _$ExploreBookStateImpl;
+  factory _ExploreBookState(
+      {List<dynamic>? categories,
+      bool isLoading,
+      bool isClicked}) = _$ExploreBookStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  List<dynamic>? get categories;
+  set categories(List<dynamic>? value);
+  @override
+  bool get isLoading;
+  set isLoading(bool value);
+  @override
+  bool get isClicked;
+  set isClicked(bool value);
 
   /// Create a copy of ExploreBookState
   /// with the given fields replaced by the non-null parameter values.

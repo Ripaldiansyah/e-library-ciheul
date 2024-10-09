@@ -11,28 +11,34 @@ class UserDao extends DatabaseAccessor<AppDatabase> with _$UserDaoMixin {
   UserDao(AppDatabase db) : super(db);
 
   Future<List<User>> getAllUsers() => select(users).get();
-
-  Future<void> insertUser(Insertable<User> user) => into(users).insert(user);
-
-  Future<void> deleteUser(Insertable<User> user) => delete(users).delete(user);
-
   Future<bool> login(String email, String password) async {
     final user = await (select(users)..where((tbl) => tbl.email.equals(email)))
         .getSingleOrNull();
 
     if (user != null && BCrypt.checkpw(password, user.password)) {
-      return true; // Login berhasil
+      return true;
     } else {
-      throw Exception(
-          'Invalid email or password'); // Mengeluarkan pengecualian jika login gagal
+      throw Exception('Invalid email or password');
     }
   }
 
-  Future<void> insertUsers(List<Insertable<User>> users) async {
-    await transaction(() async {
-      for (final user in users) {
+  Future<bool> isRegistered(String email) async {
+    final user = await (select(users)..where((tbl) => tbl.email.equals(email)))
+        .getSingleOrNull();
+
+    if (user != null) {
+      return true;
+    }
+    return false;
+  }
+
+  Future insertUser(Insertable<User> user) async {
+    try {
+      await transaction(() async {
         await into(this.users).insert(user);
-      }
-    });
+      });
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

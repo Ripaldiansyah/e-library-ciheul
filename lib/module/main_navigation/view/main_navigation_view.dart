@@ -1,8 +1,6 @@
 import 'package:e_library_ciheul/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../controller/main_navigation_controller.dart';
-import '../state/main_navigation_state.dart';
 import 'package:get_it/get_it.dart';
 
 class MainNavigationView extends StatefulWidget {
@@ -20,29 +18,6 @@ class _MainNavigationViewState extends State<MainNavigationView> {
     selectedIndex = newIndex;
     setState(() {});
   }
-
-  List menus = [
-    (
-      icon: Icons.explore_outlined,
-      label: "Explore",
-      iconActive: Icons.explore,
-    ),
-    (
-      icon: Icons.search,
-      label: "Search",
-      iconActive: Icons.search_sharp,
-    ),
-    (
-      icon: Icons.favorite_outline,
-      label: "Favorite",
-      iconActive: Icons.favorite,
-    ),
-    (
-      icon: Icons.person_outline,
-      label: "Profile",
-      iconActive: Icons.person,
-    ),
-  ];
 
   @override
   void initState() {
@@ -103,8 +78,8 @@ class _MainNavigationViewState extends State<MainNavigationView> {
               currentIndex: selectedIndex,
               onTap: updateIndex,
               type: BottomNavigationBarType.fixed,
-              items: List.generate(menus.length, (index) {
-                final item = menus[index];
+              items: List.generate(controller.menus.length, (index) {
+                final item = controller.menus[index];
                 return BottomNavigationBarItem(
                   icon: Icon(
                     item.icon,

@@ -16,8 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RegisterState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  String? get fullName => throw _privateConstructorUsedError;
+  set fullName(String? value) => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  set email(String? value) => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  set password(String? value) => throw _privateConstructorUsedError;
+  String? get passwordConfirm => throw _privateConstructorUsedError;
+  set passwordConfirm(String? value) => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
+  set role(String value) => throw _privateConstructorUsedError;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +40,12 @@ abstract class $RegisterStateCopyWith<$Res> {
           RegisterState value, $Res Function(RegisterState) then) =
       _$RegisterStateCopyWithImpl<$Res, RegisterState>;
   @useResult
-  $Res call({int counter});
+  $Res call(
+      {String? fullName,
+      String? email,
+      String? password,
+      String? passwordConfirm,
+      String role});
 }
 
 /// @nodoc
@@ -50,13 +63,33 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? fullName = freezed,
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? passwordConfirm = freezed,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      fullName: freezed == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordConfirm: freezed == passwordConfirm
+          ? _value.passwordConfirm
+          : passwordConfirm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -69,7 +102,12 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
       __$$RegisterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call(
+      {String? fullName,
+      String? email,
+      String? password,
+      String? passwordConfirm,
+      String role});
 }
 
 /// @nodoc
@@ -85,13 +123,33 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? fullName = freezed,
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? passwordConfirm = freezed,
+    Object? role = null,
   }) {
     return _then(_$RegisterStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      fullName: freezed == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordConfirm: freezed == passwordConfirm
+          ? _value.passwordConfirm
+          : passwordConfirm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -99,15 +157,32 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RegisterStateImpl implements _RegisterState {
-  _$RegisterStateImpl({this.counter = 0});
+  _$RegisterStateImpl(
+      {this.fullName = null,
+      this.email = null,
+      this.password = null,
+      this.passwordConfirm = null,
+      this.role = "user"});
 
   @override
   @JsonKey()
-  int counter;
+  String? fullName;
+  @override
+  @JsonKey()
+  String? email;
+  @override
+  @JsonKey()
+  String? password;
+  @override
+  @JsonKey()
+  String? passwordConfirm;
+  @override
+  @JsonKey()
+  String role;
 
   @override
   String toString() {
-    return 'RegisterState(counter: $counter)';
+    return 'RegisterState(fullName: $fullName, email: $email, password: $password, passwordConfirm: $passwordConfirm, role: $role)';
   }
 
   /// Create a copy of RegisterState
@@ -120,11 +195,28 @@ class _$RegisterStateImpl implements _RegisterState {
 }
 
 abstract class _RegisterState implements RegisterState {
-  factory _RegisterState({int counter}) = _$RegisterStateImpl;
+  factory _RegisterState(
+      {String? fullName,
+      String? email,
+      String? password,
+      String? passwordConfirm,
+      String role}) = _$RegisterStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  String? get fullName;
+  set fullName(String? value);
+  @override
+  String? get email;
+  set email(String? value);
+  @override
+  String? get password;
+  set password(String? value);
+  @override
+  String? get passwordConfirm;
+  set passwordConfirm(String? value);
+  @override
+  String get role;
+  set role(String value);
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.

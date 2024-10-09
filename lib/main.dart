@@ -6,10 +6,14 @@ import 'package:e_library_ciheul/shared/util/hash.dart';
 import 'package:e_library_ciheul/state_util.dart';
 import 'package:e_library_ciheul/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: primaryColor,
+  ));
   runApp(const MyApp());
 }
 
@@ -20,10 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'E-Library',
       navigatorKey: Get.navigatorKey,
+      debugShowCheckedModeBanner: false,
       theme: defaultTheme(),
-      home: SplashView(),
+      home: MainNavigationView(),
     );
   }
 }

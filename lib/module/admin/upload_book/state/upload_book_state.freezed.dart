@@ -16,8 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UploadBookState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>>? get categories =>
+      throw _privateConstructorUsedError;
+  set categories(List<Map<String, dynamic>>? value) =>
+      throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  set isLoading(bool value) => throw _privateConstructorUsedError;
 
   /// Create a copy of UploadBookState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +36,7 @@ abstract class $UploadBookStateCopyWith<$Res> {
           UploadBookState value, $Res Function(UploadBookState) then) =
       _$UploadBookStateCopyWithImpl<$Res, UploadBookState>;
   @useResult
-  $Res call({int counter});
+  $Res call({List<Map<String, dynamic>>? categories, bool isLoading});
 }
 
 /// @nodoc
@@ -50,13 +54,18 @@ class _$UploadBookStateCopyWithImpl<$Res, $Val extends UploadBookState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? categories = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -69,7 +78,7 @@ abstract class _$$UploadBookStateImplCopyWith<$Res>
       __$$UploadBookStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({List<Map<String, dynamic>>? categories, bool isLoading});
 }
 
 /// @nodoc
@@ -85,13 +94,18 @@ class __$$UploadBookStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? categories = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_$UploadBookStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -99,15 +113,18 @@ class __$$UploadBookStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UploadBookStateImpl implements _UploadBookState {
-  _$UploadBookStateImpl({this.counter = 0});
+  _$UploadBookStateImpl({this.categories = null, this.isLoading = true});
 
   @override
   @JsonKey()
-  int counter;
+  List<Map<String, dynamic>>? categories;
+  @override
+  @JsonKey()
+  bool isLoading;
 
   @override
   String toString() {
-    return 'UploadBookState(counter: $counter)';
+    return 'UploadBookState(categories: $categories, isLoading: $isLoading)';
   }
 
   /// Create a copy of UploadBookState
@@ -121,11 +138,16 @@ class _$UploadBookStateImpl implements _UploadBookState {
 }
 
 abstract class _UploadBookState implements UploadBookState {
-  factory _UploadBookState({int counter}) = _$UploadBookStateImpl;
+  factory _UploadBookState(
+      {List<Map<String, dynamic>>? categories,
+      bool isLoading}) = _$UploadBookStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  List<Map<String, dynamic>>? get categories;
+  set categories(List<Map<String, dynamic>>? value);
+  @override
+  bool get isLoading;
+  set isLoading(bool value);
 
   /// Create a copy of UploadBookState
   /// with the given fields replaced by the non-null parameter values.

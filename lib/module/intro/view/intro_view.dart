@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:e_library_ciheul/shared/widget/button/button_reusable.dart';
+import 'package:e_library_ciheul/shared/widget/button/QButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core.dart';

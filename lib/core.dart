@@ -53,6 +53,6 @@ export 'package:e_library_ciheul/shared/util/database_helper.dart';
 export 'package:e_library_ciheul/shared/util/hash.dart';
 export 'package:e_library_ciheul/shared/util/show_snackbar/show_snackbar.dart';
 export 'package:e_library_ciheul/shared/util/validator.dart';
-export 'package:e_library_ciheul/shared/widget/button/button_reusable.dart';
+export 'package:e_library_ciheul/shared/widget/button/QButton.dart';
 export 'package:e_library_ciheul/shared/widget/textfield/QTextField.dart';
 export 'package:e_library_ciheul/state_util.dart';
