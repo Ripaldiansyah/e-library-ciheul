@@ -7,10 +7,12 @@ class EditBookState with _$EditBookState {
     @Default(null) List<Map<String, dynamic>>? categories,
     @Default(true) bool isLoading,
     @Default(null) String? pathPdf,
+    @Default(null) int? id,
     @Default(null) String? pathCover,
     @Default(null) String? title,
     @Default(null) String? author,
     @Default(null) int? category,
+    @Default(null) String? categorySelected,
     @Default(null) String? description,
   }) = _EditBookState;
 }

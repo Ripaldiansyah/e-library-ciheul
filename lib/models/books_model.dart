@@ -10,4 +10,5 @@ class BooksModel extends Table {
   TextColumn get description => text()();
   TextColumn get coverPath => text()();
   TextColumn get pdfPath => text()();
+  TextColumn get upload_by => text()();
 }

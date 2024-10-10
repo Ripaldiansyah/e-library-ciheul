@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:e_library_ciheul/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../controller/list_book_controller.dart';
@@ -107,7 +108,7 @@ class _ListBookViewState extends State<ListBookView> {
                           itemBuilder: (BuildContext context, int index) {
                             var book = state.filteredBookByCategory?[index];
                             var image = book.coverPath
-                                    .contains('assets/categories')
+                                    .contains('assets/dummy_books')
                                 ? Image.asset(
                                     book.coverPath,
                                     width: MediaQuery.of(context).size.width,

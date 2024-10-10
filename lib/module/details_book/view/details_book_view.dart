@@ -13,11 +13,11 @@ class DetailsBookView extends StatefulWidget {
   const DetailsBookView({
     super.key,
     required this.book,
-    required this.fetchData,
+    this.fetchData,
   });
 
   final book;
-  final Function() fetchData;
+  final Function()? fetchData;
   @override
   State<DetailsBookView> createState() => _DetailsBookViewState();
 }
@@ -67,7 +67,7 @@ class _DetailsBookViewState extends State<DetailsBookView> {
     DetailsBookState state,
   ) {
     ImageProvider<Object> image =
-        widget.book.coverPath.contains('assets/categories')
+        widget.book.coverPath.contains('assets/dummy_books')
             ? AssetImage(
                 widget.book.coverPath,
               )
@@ -140,7 +140,10 @@ class _DetailsBookViewState extends State<DetailsBookView> {
                             ),
                             IconButton(
                               onPressed: () {
-                                controller.editBook();
+                                controller.editBook(
+                                  widget.book,
+                                  widget.fetchData,
+                                );
                               },
                               icon: Icon(
                                 Icons.edit,
@@ -151,7 +154,7 @@ class _DetailsBookViewState extends State<DetailsBookView> {
                             IconButton(
                               onPressed: () {
                                 controller.deleteBook(widget.book.id);
-                                widget.fetchData();
+                                widget.fetchData ?? ();
                               },
                               icon: Icon(
                                 Icons.delete,
@@ -168,6 +171,13 @@ class _DetailsBookViewState extends State<DetailsBookView> {
                           ),
                         ),
                         Divider(),
+                        Text(
+                          "Sinopsis",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         MoreText(
                           text: "${widget.book.description}",
                         ),
@@ -180,8 +190,10 @@ class _DetailsBookViewState extends State<DetailsBookView> {
             bottomNavigationBar: Padding(
               padding: EdgeInsets.all(8.0),
               child: QButton(
-                label: "Download PDF",
-                onPressed: () {},
+                label: "Buka PDF",
+                onPressed: () {
+                  controller.openPdf(widget.book.pdfPath);
+                },
               ),
             ),
           );

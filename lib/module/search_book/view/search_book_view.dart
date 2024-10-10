@@ -1,6 +1,8 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../core.dart';
 import '../controller/search_book_controller.dart';
 import '../state/search_book_state.dart';
 import 'package:get_it/get_it.dart';
@@ -56,28 +58,87 @@ class _SearchBookViewState extends State<SearchBookView> {
     SearchBookState state,
   ) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search Book'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            'Counter: ${state.counter}',
-            style: const TextStyle(fontSize: 24),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 5.0,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    fillColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: Colors.grey[300]!,
+                      ),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                  ),
+                  onChanged: (value) async {
+                    List<Books> results = await controller.searchBook(value);
+                    controller.emitType(value, results);
+                  },
+                ),
+              ),
+              if (state.textTyped != null && state.textTyped != "")
+                Expanded(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      itemCount: state.books?.length,
+                      shrinkWrap: true,
+                      physics: const ScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        var item = state.books![index];
+                        ImageProvider<Object> image =
+                            item.coverPath.contains('assets/dummy_books')
+                                ? AssetImage(
+                                    item.coverPath,
+                                  )
+                                : FileImage(
+                                    File(item.coverPath),
+                                  );
+                        return Card(
+                          child: InkWell(
+                            onTap: () {
+                              controller.detailBook(item);
+                              controller.emitType(null, []);
+                            },
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.grey[200],
+                                backgroundImage: image,
+                              ),
+                              title: Text(item.title),
+                              subtitle: Text("${item.author}"),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+            ],
           ),
-          IconButton(
-            onPressed: () => controller.increment(),
-            icon: const Icon(
-              Icons.add,
-              size: 24.0,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 }
-    
-    

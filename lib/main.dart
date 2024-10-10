@@ -11,8 +11,8 @@ import 'package:flutter/services.dart';
 import 'shared/util/db_service/db_service.dart';
 
 void main() async {
-  await DBService.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await DBService.init();
   configureDependencies();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: primaryColor,
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: defaultTheme(),
-      home: MainNavigationView(),
+      home: IntroView(),
     );
   }
 }

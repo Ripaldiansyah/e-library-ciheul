@@ -13,7 +13,6 @@ class ExploreBookController extends Cubit<ExploreBookState>
   @override
   void initState() {
     //initState event
-    getGategories();
     state.isClicked = false;
   }
 

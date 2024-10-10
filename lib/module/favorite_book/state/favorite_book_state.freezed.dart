@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FavoriteBookState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  List<dynamic>? get books => throw _privateConstructorUsedError;
+  set books(List<dynamic>? value) => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  set isLoading(bool value) => throw _privateConstructorUsedError;
 
   /// Create a copy of FavoriteBookState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,7 @@ abstract class $FavoriteBookStateCopyWith<$Res> {
           FavoriteBookState value, $Res Function(FavoriteBookState) then) =
       _$FavoriteBookStateCopyWithImpl<$Res, FavoriteBookState>;
   @useResult
-  $Res call({int counter});
+  $Res call({List<dynamic>? books, bool isLoading});
 }
 
 /// @nodoc
@@ -50,13 +52,18 @@ class _$FavoriteBookStateCopyWithImpl<$Res, $Val extends FavoriteBookState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? books = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      books: freezed == books
+          ? _value.books
+          : books // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -69,7 +76,7 @@ abstract class _$$FavoriteBookStateImplCopyWith<$Res>
       __$$FavoriteBookStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({List<dynamic>? books, bool isLoading});
 }
 
 /// @nodoc
@@ -85,13 +92,18 @@ class __$$FavoriteBookStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? books = freezed,
+    Object? isLoading = null,
   }) {
     return _then(_$FavoriteBookStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      books: freezed == books
+          ? _value.books
+          : books // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -99,15 +111,18 @@ class __$$FavoriteBookStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FavoriteBookStateImpl implements _FavoriteBookState {
-  _$FavoriteBookStateImpl({this.counter = 0});
+  _$FavoriteBookStateImpl({this.books = null, this.isLoading = true});
 
   @override
   @JsonKey()
-  int counter;
+  List<dynamic>? books;
+  @override
+  @JsonKey()
+  bool isLoading;
 
   @override
   String toString() {
-    return 'FavoriteBookState(counter: $counter)';
+    return 'FavoriteBookState(books: $books, isLoading: $isLoading)';
   }
 
   /// Create a copy of FavoriteBookState
@@ -121,11 +136,15 @@ class _$FavoriteBookStateImpl implements _FavoriteBookState {
 }
 
 abstract class _FavoriteBookState implements FavoriteBookState {
-  factory _FavoriteBookState({int counter}) = _$FavoriteBookStateImpl;
+  factory _FavoriteBookState({List<dynamic>? books, bool isLoading}) =
+      _$FavoriteBookStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  List<dynamic>? get books;
+  set books(List<dynamic>? value);
+  @override
+  bool get isLoading;
+  set isLoading(bool value);
 
   /// Create a copy of FavoriteBookState
   /// with the given fields replaced by the non-null parameter values.

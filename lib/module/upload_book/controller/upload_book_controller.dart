@@ -51,6 +51,7 @@ class UploadBookController extends Cubit<UploadBookState> implements IBlocBase {
         coverPath: Value(state.pathCover!),
         pdfPath: Value(state.pathPdf!),
         description: Value(state.description!),
+        upload_by: Value(DBService.get("userId")!),
       ));
       snackbarSuccess(message: "Your book has been published successfully.");
       Get.back();
@@ -73,7 +74,7 @@ class UploadBookController extends Cubit<UploadBookState> implements IBlocBase {
       String fileName = basename(file.path);
       File newFile = await file.copy('${appDocDir.path}/$fileName');
       emit(state.copyWith(pathPdf: newFile.path));
-    } else {}
+    }
   }
 
   uploadBookCover() async {
@@ -88,6 +89,7 @@ class UploadBookController extends Cubit<UploadBookState> implements IBlocBase {
       String fileName = basename(file.path);
       File newFile = await file.copy('${appDocDir.path}/$fileName');
       emit(state.copyWith(pathCover: newFile.path));
-    } else {}
+      print(state.pathCover);
+    }
   }
 }

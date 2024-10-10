@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:drift/drift.dart';
 import 'package:e_library_ciheul/daos/favorites/favorites_dao.dart';
 import 'package:e_library_ciheul/shared/util/db_service/db_service.dart';
@@ -27,8 +29,11 @@ class DetailsBookController extends Cubit<DetailsBookState>
     //ready event
   }
 
-  editBook() {
-    Get.to(EditBookView());
+  editBook(book, Function()? fetchData) {
+    Get.to(EditBookView(
+      book: book,
+      fetchData: fetchData,
+    ));
   }
 
   deleteBook(id) async {
@@ -72,5 +77,9 @@ class DetailsBookController extends Cubit<DetailsBookState>
         userId: Value(int.parse(DBService.get("userId")!)),
       ));
     } catch (e) {}
+  }
+
+  openPdf(String path) {
+    Get.to(PdfViewView(pathPdf: path));
   }
 }

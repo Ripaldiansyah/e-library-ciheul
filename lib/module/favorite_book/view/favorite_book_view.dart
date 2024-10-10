@@ -1,4 +1,5 @@
-import 'package:e_library_ciheul/shared/util/show_snackbar/show_snackbar.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../controller/favorite_book_controller.dart';
@@ -25,6 +26,7 @@ class _FavoriteBookViewState extends State<FavoriteBookView> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => controller.ready(),
     );
+
     super.initState();
   }
 
@@ -55,27 +57,55 @@ class _FavoriteBookViewState extends State<FavoriteBookView> {
     FavoriteBookController controller,
     FavoriteBookState state,
   ) {
+    controller.getFavoriteBook();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorite Book'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            'Counter: ${state.counter}',
-            style: const TextStyle(fontSize: 24),
-          ),
-          IconButton(
-            onPressed: () => snackbarDanger(message: "Password salah"),
-            icon: const Icon(
-              Icons.add,
-              size: 24.0,
-            ),
-          ),
-        ],
-      ),
+      body: state.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : state.books!.length == 0
+              ? Center(
+                  child: Text(
+                    "Tidak ada buku Favorite",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: state.books?.length,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    var item = state.books![index];
+                    ImageProvider<Object> image =
+                        item.coverPath.contains('assets/dummy_books')
+                            ? AssetImage(
+                                item.coverPath,
+                              )
+                            : FileImage(
+                                File(item.coverPath),
+                              );
+                    return Card(
+                      child: InkWell(
+                        onTap: () {
+                          controller.detailBook(item);
+                        },
+                        child: ListTile(
+                          leading: CircleAvatar(
+                              backgroundColor: Colors.grey[200],
+                              backgroundImage: image),
+                          title: Text(item.title),
+                          subtitle: Text("${item.author}"),
+                        ),
+                      ),
+                    );
+                  },
+                ),
     );
   }
 }

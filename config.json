@@ -13,7 +13,8 @@
         "edit_book",
         "details_book",
         "list_book",
-        "add_category"
+        "add_category",
+        "pdf_view"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

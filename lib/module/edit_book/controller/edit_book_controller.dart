@@ -12,9 +12,7 @@ class EditBookController extends Cubit<EditBookState> implements IBlocBase {
   EditBookController() : super(EditBookState());
 
   @override
-  void initState() {
-    getGategories();
-  }
+  void initState() {}
 
   @override
   void dispose() {
@@ -31,7 +29,7 @@ class EditBookController extends Cubit<EditBookState> implements IBlocBase {
       final db = await DatabaseHelper().database;
       final categoriesDao = CategoriesDao(db);
       final categories = await categoriesDao.getCategoryLabels();
-      emit(state.copyWith(categories: categories, isLoading: false));
+      emit(state.copyWith(categories: categories));
     } catch (e) {
       String message = e.toString();
       message = message.replaceAll("Exception: ", "");
@@ -39,12 +37,32 @@ class EditBookController extends Cubit<EditBookState> implements IBlocBase {
     }
   }
 
-  publish() async {
+  getGategoriesById(id) async {
+    await getGategories();
+    try {
+      final db = await DatabaseHelper().database;
+      final categoriesDao = CategoriesDao(db);
+      final categories = await categoriesDao.getCategoryById(id);
+
+      emit(state.copyWith(
+        category: categories.id,
+        categorySelected: categories.id.toString(),
+        isLoading: false,
+      ));
+    } catch (e) {
+      String message = e.toString();
+      message = message.replaceAll("Exception: ", "");
+      snackbarDanger(message: message);
+    }
+  }
+
+  editBook() async {
     final db = await DatabaseHelper().database;
     final booksDao = BooksDao(db);
 
     try {
-      await booksDao.insertBook(BooksModelCompanion(
+      await booksDao.updateBook(BooksModelCompanion(
+        id: Value(state.id!),
         title: Value(state.title!),
         author: Value(state.author!),
         categoryId: Value(state.category!),
@@ -52,14 +70,20 @@ class EditBookController extends Cubit<EditBookState> implements IBlocBase {
         pdfPath: Value(state.pathPdf!),
         description: Value(state.description!),
       ));
-      snackbarSuccess(message: "Your book has been published successfully.");
       Get.back();
+      Get.back();
+
+      snackbarSuccess(message: "Your book has been updated successfully.");
     } catch (e) {
       String message = e.toString();
       message = message.replaceAll("Exception: ", "");
       snackbarDanger(message: message);
     }
   }
+
+  // state.pathCover = widget.book.coverPath;
+  // state.pathPdf = widget.book.pdfPath;
+  //
 
   uploadPdf() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -73,7 +97,7 @@ class EditBookController extends Cubit<EditBookState> implements IBlocBase {
       String fileName = basename(file.path);
       File newFile = await file.copy('${appDocDir.path}/$fileName');
       emit(state.copyWith(pathPdf: newFile.path));
-    } else {}
+    }
   }
 
   uploadBookCover() async {
@@ -88,6 +112,6 @@ class EditBookController extends Cubit<EditBookState> implements IBlocBase {
       String fileName = basename(file.path);
       File newFile = await file.copy('${appDocDir.path}/$fileName');
       emit(state.copyWith(pathCover: newFile.path));
-    } else {}
+    }
   }
 }

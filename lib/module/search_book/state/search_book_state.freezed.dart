@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchBookState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  String? get textTyped => throw _privateConstructorUsedError;
+  set textTyped(String? value) => throw _privateConstructorUsedError;
+  List<dynamic>? get books => throw _privateConstructorUsedError;
+  set books(List<dynamic>? value) => throw _privateConstructorUsedError;
 
   /// Create a copy of SearchBookState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,7 @@ abstract class $SearchBookStateCopyWith<$Res> {
           SearchBookState value, $Res Function(SearchBookState) then) =
       _$SearchBookStateCopyWithImpl<$Res, SearchBookState>;
   @useResult
-  $Res call({int counter});
+  $Res call({String? textTyped, List<dynamic>? books});
 }
 
 /// @nodoc
@@ -50,13 +52,18 @@ class _$SearchBookStateCopyWithImpl<$Res, $Val extends SearchBookState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? textTyped = freezed,
+    Object? books = freezed,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      textTyped: freezed == textTyped
+          ? _value.textTyped
+          : textTyped // ignore: cast_nullable_to_non_nullable
+              as String?,
+      books: freezed == books
+          ? _value.books
+          : books // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
     ) as $Val);
   }
 }
@@ -69,7 +76,7 @@ abstract class _$$SearchBookStateImplCopyWith<$Res>
       __$$SearchBookStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({String? textTyped, List<dynamic>? books});
 }
 
 /// @nodoc
@@ -85,13 +92,18 @@ class __$$SearchBookStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? textTyped = freezed,
+    Object? books = freezed,
   }) {
     return _then(_$SearchBookStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      textTyped: freezed == textTyped
+          ? _value.textTyped
+          : textTyped // ignore: cast_nullable_to_non_nullable
+              as String?,
+      books: freezed == books
+          ? _value.books
+          : books // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
     ));
   }
 }
@@ -99,15 +111,18 @@ class __$$SearchBookStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchBookStateImpl implements _SearchBookState {
-  _$SearchBookStateImpl({this.counter = 0});
+  _$SearchBookStateImpl({this.textTyped = null, this.books = null});
 
   @override
   @JsonKey()
-  int counter;
+  String? textTyped;
+  @override
+  @JsonKey()
+  List<dynamic>? books;
 
   @override
   String toString() {
-    return 'SearchBookState(counter: $counter)';
+    return 'SearchBookState(textTyped: $textTyped, books: $books)';
   }
 
   /// Create a copy of SearchBookState
@@ -121,11 +136,15 @@ class _$SearchBookStateImpl implements _SearchBookState {
 }
 
 abstract class _SearchBookState implements SearchBookState {
-  factory _SearchBookState({int counter}) = _$SearchBookStateImpl;
+  factory _SearchBookState({String? textTyped, List<dynamic>? books}) =
+      _$SearchBookStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  String? get textTyped;
+  set textTyped(String? value);
+  @override
+  List<dynamic>? get books;
+  set books(List<dynamic>? value);
 
   /// Create a copy of SearchBookState
   /// with the given fields replaced by the non-null parameter values.

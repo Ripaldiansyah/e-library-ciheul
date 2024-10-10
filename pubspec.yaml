@@ -52,6 +52,7 @@ dependencies:
   bcrypt: ^1.1.3
   sqlite3_flutter_libs: ^0.5.24
   shared_preferences: ^2.3.2
+  syncfusion_flutter_pdfviewer: ^27.1.52
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,9 @@ flutter:
   assets:
     - assets/
     - assets/categories/
+    - assets/dummy_books/
+    - assets/dummy_books/op.pdf
+    - assets/dummy_books/Naruto.pdf
     - assets/db_init/
     # - assets/intro
   #   - images/a_dot_ham.jpeg

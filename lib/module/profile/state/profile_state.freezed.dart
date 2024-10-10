@@ -16,8 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProfileState {
-  int get counter => throw _privateConstructorUsedError;
-  set counter(int value) => throw _privateConstructorUsedError;
+  int get totalFavorite => throw _privateConstructorUsedError;
+  set totalFavorite(int value) => throw _privateConstructorUsedError;
+  int get totalMyBook => throw _privateConstructorUsedError;
+  set totalMyBook(int value) => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  set isLoading(bool value) => throw _privateConstructorUsedError;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +36,7 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({int counter});
+  $Res call({int totalFavorite, int totalMyBook, bool isLoading});
 }
 
 /// @nodoc
@@ -50,13 +54,23 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? totalFavorite = null,
+    Object? totalMyBook = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
+      totalFavorite: null == totalFavorite
+          ? _value.totalFavorite
+          : totalFavorite // ignore: cast_nullable_to_non_nullable
               as int,
+      totalMyBook: null == totalMyBook
+          ? _value.totalMyBook
+          : totalMyBook // ignore: cast_nullable_to_non_nullable
+              as int,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -69,7 +83,7 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       __$$ProfileStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call({int totalFavorite, int totalMyBook, bool isLoading});
 }
 
 /// @nodoc
@@ -85,13 +99,23 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? totalFavorite = null,
+    Object? totalMyBook = null,
+    Object? isLoading = null,
   }) {
     return _then(_$ProfileStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
+      totalFavorite: null == totalFavorite
+          ? _value.totalFavorite
+          : totalFavorite // ignore: cast_nullable_to_non_nullable
               as int,
+      totalMyBook: null == totalMyBook
+          ? _value.totalMyBook
+          : totalMyBook // ignore: cast_nullable_to_non_nullable
+              as int,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -99,15 +123,22 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ProfileStateImpl implements _ProfileState {
-  _$ProfileStateImpl({this.counter = 0});
+  _$ProfileStateImpl(
+      {this.totalFavorite = 0, this.totalMyBook = 0, this.isLoading = true});
 
   @override
   @JsonKey()
-  int counter;
+  int totalFavorite;
+  @override
+  @JsonKey()
+  int totalMyBook;
+  @override
+  @JsonKey()
+  bool isLoading;
 
   @override
   String toString() {
-    return 'ProfileState(counter: $counter)';
+    return 'ProfileState(totalFavorite: $totalFavorite, totalMyBook: $totalMyBook, isLoading: $isLoading)';
   }
 
   /// Create a copy of ProfileState
@@ -120,11 +151,18 @@ class _$ProfileStateImpl implements _ProfileState {
 }
 
 abstract class _ProfileState implements ProfileState {
-  factory _ProfileState({int counter}) = _$ProfileStateImpl;
+  factory _ProfileState({int totalFavorite, int totalMyBook, bool isLoading}) =
+      _$ProfileStateImpl;
 
   @override
-  int get counter;
-  set counter(int value);
+  int get totalFavorite;
+  set totalFavorite(int value);
+  @override
+  int get totalMyBook;
+  set totalMyBook(int value);
+  @override
+  bool get isLoading;
+  set isLoading(bool value);
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.

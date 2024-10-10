@@ -30,6 +30,7 @@ class _ExploreBookViewState extends State<ExploreBookView> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => controller.initState(),
     );
+    controller.getGategories();
     super.initState();
   }
 

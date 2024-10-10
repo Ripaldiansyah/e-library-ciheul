@@ -6,8 +6,14 @@ import '../state/edit_book_state.dart';
 import 'package:get_it/get_it.dart';
 
 class EditBookView extends StatefulWidget {
-  const EditBookView({super.key});
+  const EditBookView({
+    super.key,
+    required this.book,
+    this.fetchData,
+  });
 
+  final book;
+  final Function()? fetchData;
   @override
   State<EditBookView> createState() => _EditBookViewState();
 }
@@ -24,8 +30,9 @@ class _EditBookViewState extends State<EditBookView> {
     GetIt.I.registerSingleton(controller);
     controller.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => controller.ready(),
+      (_) => controller.getGategoriesById(widget.book.categoryId),
     );
+
     super.initState();
   }
 
@@ -44,6 +51,10 @@ class _EditBookViewState extends State<EditBookView> {
         child: BlocBuilder<EditBookController, EditBookState>(
           builder: (context, state) {
             final bloc = context.read<EditBookController>();
+            state.description = widget.book.description;
+            state.title = widget.book.title;
+            state.author = widget.book.author;
+            state.id = widget.book.id;
             return buildView(context, bloc, state);
           },
         ),
@@ -62,7 +73,7 @@ class _EditBookViewState extends State<EditBookView> {
           )
         : Scaffold(
             appBar: AppBar(
-              title: const Text('Upload Book'),
+              title: Text('Edit Buku ${widget.book.title}'),
             ),
             body: SingleChildScrollView(
               controller: ScrollController(),
@@ -77,7 +88,7 @@ class _EditBookViewState extends State<EditBookView> {
                       QTextField(
                         label: "Judul Buku",
                         validator: Validator.required,
-                        value: null,
+                        value: state.title,
                         onChanged: (value) {
                           state.title = value;
                         },
@@ -85,7 +96,7 @@ class _EditBookViewState extends State<EditBookView> {
                       QTextField(
                         label: "Nama Pengarang",
                         validator: Validator.required,
-                        value: null,
+                        value: state.author,
                         onChanged: (value) {
                           state.author = value;
                         },
@@ -94,6 +105,7 @@ class _EditBookViewState extends State<EditBookView> {
                         label: "Kategori",
                         validator: Validator.required,
                         items: state.categories!,
+                        value: state.categorySelected,
                         onChanged: (value, label) {
                           state.category = int.parse(value);
                         },
@@ -106,7 +118,7 @@ class _EditBookViewState extends State<EditBookView> {
                               child: QTextField(
                                 label: "Upload Cover Buku",
                                 validator: Validator.required,
-                                value: state.pathCover,
+                                value: state.pathCover ?? widget.book.coverPath,
                                 enabled: false,
                                 onChanged: (value) {},
                               ),
@@ -134,7 +146,7 @@ class _EditBookViewState extends State<EditBookView> {
                               child: QTextField(
                                 label: "Upload Buku",
                                 validator: Validator.required,
-                                value: state.pathPdf,
+                                value: state.pathPdf ?? widget.book.pdfPath,
                                 enabled: false,
                                 onChanged: (value) {},
                               ),
@@ -157,7 +169,7 @@ class _EditBookViewState extends State<EditBookView> {
                       QTextField(
                         label: "Deskripsi",
                         validator: Validator.required,
-                        value: null,
+                        value: state.description,
                         maxLines: 4,
                         maxLength: 255,
                         horizontal: 20,
@@ -174,13 +186,17 @@ class _EditBookViewState extends State<EditBookView> {
             bottomNavigationBar: Padding(
               padding: EdgeInsets.all(8.0),
               child: QButton(
-                label: "Publish",
+                label: "Edit Buku",
                 onPressed: () {
                   bool isNotValid = formKey.currentState!.validate() == false;
                   if (isNotValid) {
                     return;
                   }
-                  controller.publish();
+
+                  state.pathCover = state.pathCover ?? widget.book.coverPath;
+                  state.pathPdf = state.pathPdf ?? widget.book.pdfPath;
+                  controller.editBook();
+                  widget.fetchData ?? ();
                 },
               ),
             ),

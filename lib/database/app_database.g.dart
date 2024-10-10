@@ -563,9 +563,23 @@ class $BooksModelTable extends BooksModel
   late final GeneratedColumn<String> pdfPath = GeneratedColumn<String>(
       'pdf_path', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _upload_byMeta =
+      const VerificationMeta('upload_by');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, title, author, categoryId, description, coverPath, pdfPath];
+  late final GeneratedColumn<String> upload_by = GeneratedColumn<String>(
+      'upload_by', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        title,
+        author,
+        categoryId,
+        description,
+        coverPath,
+        pdfPath,
+        upload_by
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -619,6 +633,12 @@ class $BooksModelTable extends BooksModel
     } else if (isInserting) {
       context.missing(_pdfPathMeta);
     }
+    if (data.containsKey('upload_by')) {
+      context.handle(_upload_byMeta,
+          upload_by.isAcceptableOrUnknown(data['upload_by']!, _upload_byMeta));
+    } else if (isInserting) {
+      context.missing(_upload_byMeta);
+    }
     return context;
   }
 
@@ -642,6 +662,8 @@ class $BooksModelTable extends BooksModel
           .read(DriftSqlType.string, data['${effectivePrefix}cover_path'])!,
       pdfPath: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}pdf_path'])!,
+      upload_by: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}upload_by'])!,
     );
   }
 
@@ -659,6 +681,7 @@ class Books extends DataClass implements Insertable<Books> {
   final String description;
   final String coverPath;
   final String pdfPath;
+  final String upload_by;
   const Books(
       {required this.id,
       required this.title,
@@ -666,7 +689,8 @@ class Books extends DataClass implements Insertable<Books> {
       required this.categoryId,
       required this.description,
       required this.coverPath,
-      required this.pdfPath});
+      required this.pdfPath,
+      required this.upload_by});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -677,6 +701,7 @@ class Books extends DataClass implements Insertable<Books> {
     map['description'] = Variable<String>(description);
     map['cover_path'] = Variable<String>(coverPath);
     map['pdf_path'] = Variable<String>(pdfPath);
+    map['upload_by'] = Variable<String>(upload_by);
     return map;
   }
 
@@ -689,6 +714,7 @@ class Books extends DataClass implements Insertable<Books> {
       description: Value(description),
       coverPath: Value(coverPath),
       pdfPath: Value(pdfPath),
+      upload_by: Value(upload_by),
     );
   }
 
@@ -703,6 +729,7 @@ class Books extends DataClass implements Insertable<Books> {
       description: serializer.fromJson<String>(json['description']),
       coverPath: serializer.fromJson<String>(json['coverPath']),
       pdfPath: serializer.fromJson<String>(json['pdfPath']),
+      upload_by: serializer.fromJson<String>(json['upload_by']),
     );
   }
   @override
@@ -716,6 +743,7 @@ class Books extends DataClass implements Insertable<Books> {
       'description': serializer.toJson<String>(description),
       'coverPath': serializer.toJson<String>(coverPath),
       'pdfPath': serializer.toJson<String>(pdfPath),
+      'upload_by': serializer.toJson<String>(upload_by),
     };
   }
 
@@ -726,7 +754,8 @@ class Books extends DataClass implements Insertable<Books> {
           int? categoryId,
           String? description,
           String? coverPath,
-          String? pdfPath}) =>
+          String? pdfPath,
+          String? upload_by}) =>
       Books(
         id: id ?? this.id,
         title: title ?? this.title,
@@ -735,6 +764,7 @@ class Books extends DataClass implements Insertable<Books> {
         description: description ?? this.description,
         coverPath: coverPath ?? this.coverPath,
         pdfPath: pdfPath ?? this.pdfPath,
+        upload_by: upload_by ?? this.upload_by,
       );
   Books copyWithCompanion(BooksModelCompanion data) {
     return Books(
@@ -747,6 +777,7 @@ class Books extends DataClass implements Insertable<Books> {
           data.description.present ? data.description.value : this.description,
       coverPath: data.coverPath.present ? data.coverPath.value : this.coverPath,
       pdfPath: data.pdfPath.present ? data.pdfPath.value : this.pdfPath,
+      upload_by: data.upload_by.present ? data.upload_by.value : this.upload_by,
     );
   }
 
@@ -759,14 +790,15 @@ class Books extends DataClass implements Insertable<Books> {
           ..write('categoryId: $categoryId, ')
           ..write('description: $description, ')
           ..write('coverPath: $coverPath, ')
-          ..write('pdfPath: $pdfPath')
+          ..write('pdfPath: $pdfPath, ')
+          ..write('upload_by: $upload_by')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, title, author, categoryId, description, coverPath, pdfPath);
+  int get hashCode => Object.hash(id, title, author, categoryId, description,
+      coverPath, pdfPath, upload_by);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -777,7 +809,8 @@ class Books extends DataClass implements Insertable<Books> {
           other.categoryId == this.categoryId &&
           other.description == this.description &&
           other.coverPath == this.coverPath &&
-          other.pdfPath == this.pdfPath);
+          other.pdfPath == this.pdfPath &&
+          other.upload_by == this.upload_by);
 }
 
 class BooksModelCompanion extends UpdateCompanion<Books> {
@@ -788,6 +821,7 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
   final Value<String> description;
   final Value<String> coverPath;
   final Value<String> pdfPath;
+  final Value<String> upload_by;
   const BooksModelCompanion({
     this.id = const Value.absent(),
     this.title = const Value.absent(),
@@ -796,6 +830,7 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
     this.description = const Value.absent(),
     this.coverPath = const Value.absent(),
     this.pdfPath = const Value.absent(),
+    this.upload_by = const Value.absent(),
   });
   BooksModelCompanion.insert({
     this.id = const Value.absent(),
@@ -805,12 +840,14 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
     required String description,
     required String coverPath,
     required String pdfPath,
+    required String upload_by,
   })  : title = Value(title),
         author = Value(author),
         categoryId = Value(categoryId),
         description = Value(description),
         coverPath = Value(coverPath),
-        pdfPath = Value(pdfPath);
+        pdfPath = Value(pdfPath),
+        upload_by = Value(upload_by);
   static Insertable<Books> custom({
     Expression<int>? id,
     Expression<String>? title,
@@ -819,6 +856,7 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
     Expression<String>? description,
     Expression<String>? coverPath,
     Expression<String>? pdfPath,
+    Expression<String>? upload_by,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -828,6 +866,7 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
       if (description != null) 'description': description,
       if (coverPath != null) 'cover_path': coverPath,
       if (pdfPath != null) 'pdf_path': pdfPath,
+      if (upload_by != null) 'upload_by': upload_by,
     });
   }
 
@@ -838,7 +877,8 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
       Value<int>? categoryId,
       Value<String>? description,
       Value<String>? coverPath,
-      Value<String>? pdfPath}) {
+      Value<String>? pdfPath,
+      Value<String>? upload_by}) {
     return BooksModelCompanion(
       id: id ?? this.id,
       title: title ?? this.title,
@@ -847,6 +887,7 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
       description: description ?? this.description,
       coverPath: coverPath ?? this.coverPath,
       pdfPath: pdfPath ?? this.pdfPath,
+      upload_by: upload_by ?? this.upload_by,
     );
   }
 
@@ -874,6 +915,9 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
     if (pdfPath.present) {
       map['pdf_path'] = Variable<String>(pdfPath.value);
     }
+    if (upload_by.present) {
+      map['upload_by'] = Variable<String>(upload_by.value);
+    }
     return map;
   }
 
@@ -886,7 +930,8 @@ class BooksModelCompanion extends UpdateCompanion<Books> {
           ..write('categoryId: $categoryId, ')
           ..write('description: $description, ')
           ..write('coverPath: $coverPath, ')
-          ..write('pdfPath: $pdfPath')
+          ..write('pdfPath: $pdfPath, ')
+          ..write('upload_by: $upload_by')
           ..write(')'))
         .toString();
   }
@@ -913,14 +958,16 @@ class $FavoriteModelTable extends FavoriteModel
       'book_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
-      $customConstraints: 'REFERENCES books_model(id)');
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES books_model (id)'));
   static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
   @override
   late final GeneratedColumn<int> userId = GeneratedColumn<int>(
       'user_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
-      $customConstraints: 'REFERENCES users(id)');
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES users (id)'));
   @override
   List<GeneratedColumn> get $columns => [id, bookId, userId];
   @override
@@ -1144,6 +1191,26 @@ typedef $$UsersTableUpdateCompanionBuilder = UsersCompanion Function({
   Value<String> role,
 });
 
+final class $$UsersTableReferences
+    extends BaseReferences<_$AppDatabase, $UsersTable, User> {
+  $$UsersTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$FavoriteModelTable, List<favorites>>
+      _favoriteModelRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.favoriteModel,
+              aliasName:
+                  $_aliasNameGenerator(db.users.id, db.favoriteModel.userId));
+
+  $$FavoriteModelTableProcessedTableManager get favoriteModelRefs {
+    final manager = $$FavoriteModelTableTableManager($_db, $_db.favoriteModel)
+        .filter((f) => f.userId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_favoriteModelRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
 class $$UsersTableFilterComposer
     extends FilterComposer<_$AppDatabase, $UsersTable> {
   $$UsersTableFilterComposer(super.$state);
@@ -1171,6 +1238,19 @@ class $$UsersTableFilterComposer
       column: $state.table.role,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ComposableFilter favoriteModelRefs(
+      ComposableFilter Function($$FavoriteModelTableFilterComposer f) f) {
+    final $$FavoriteModelTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $state.db.favoriteModel,
+        getReferencedColumn: (t) => t.userId,
+        builder: (joinBuilder, parentComposers) =>
+            $$FavoriteModelTableFilterComposer(ComposerState($state.db,
+                $state.db.favoriteModel, joinBuilder, parentComposers)));
+    return f(composer);
+  }
 }
 
 class $$UsersTableOrderingComposer
@@ -1210,9 +1290,9 @@ class $$UsersTableTableManager extends RootTableManager<
     $$UsersTableOrderingComposer,
     $$UsersTableCreateCompanionBuilder,
     $$UsersTableUpdateCompanionBuilder,
-    (User, BaseReferences<_$AppDatabase, $UsersTable, User>),
+    (User, $$UsersTableReferences),
     User,
-    PrefetchHooks Function()> {
+    PrefetchHooks Function({bool favoriteModelRefs})> {
   $$UsersTableTableManager(_$AppDatabase db, $UsersTable table)
       : super(TableManagerState(
           db: db,
@@ -1250,9 +1330,34 @@ class $$UsersTableTableManager extends RootTableManager<
             role: role,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map((e) =>
+                  (e.readTable(table), $$UsersTableReferences(db, table, e)))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({favoriteModelRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (favoriteModelRefs) db.favoriteModel
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (favoriteModelRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$UsersTableReferences._favoriteModelRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$UsersTableReferences(db, table, p0)
+                                .favoriteModelRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.userId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
@@ -1264,9 +1369,9 @@ typedef $$UsersTableProcessedTableManager = ProcessedTableManager<
     $$UsersTableOrderingComposer,
     $$UsersTableCreateCompanionBuilder,
     $$UsersTableUpdateCompanionBuilder,
-    (User, BaseReferences<_$AppDatabase, $UsersTable, User>),
+    (User, $$UsersTableReferences),
     User,
-    PrefetchHooks Function()>;
+    PrefetchHooks Function({bool favoriteModelRefs})>;
 typedef $$CategoriesTableCreateCompanionBuilder = CategoriesCompanion Function({
   Value<int> id,
   required String label,
@@ -1381,6 +1486,7 @@ typedef $$BooksModelTableCreateCompanionBuilder = BooksModelCompanion Function({
   required String description,
   required String coverPath,
   required String pdfPath,
+  required String upload_by,
 });
 typedef $$BooksModelTableUpdateCompanionBuilder = BooksModelCompanion Function({
   Value<int> id,
@@ -1390,7 +1496,28 @@ typedef $$BooksModelTableUpdateCompanionBuilder = BooksModelCompanion Function({
   Value<String> description,
   Value<String> coverPath,
   Value<String> pdfPath,
+  Value<String> upload_by,
 });
+
+final class $$BooksModelTableReferences
+    extends BaseReferences<_$AppDatabase, $BooksModelTable, Books> {
+  $$BooksModelTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$FavoriteModelTable, List<favorites>>
+      _favoriteModelRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.favoriteModel,
+              aliasName: $_aliasNameGenerator(
+                  db.booksModel.id, db.favoriteModel.bookId));
+
+  $$FavoriteModelTableProcessedTableManager get favoriteModelRefs {
+    final manager = $$FavoriteModelTableTableManager($_db, $_db.favoriteModel)
+        .filter((f) => f.bookId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_favoriteModelRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
 
 class $$BooksModelTableFilterComposer
     extends FilterComposer<_$AppDatabase, $BooksModelTable> {
@@ -1429,6 +1556,24 @@ class $$BooksModelTableFilterComposer
       column: $state.table.pdfPath,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get upload_by => $state.composableBuilder(
+      column: $state.table.upload_by,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ComposableFilter favoriteModelRefs(
+      ComposableFilter Function($$FavoriteModelTableFilterComposer f) f) {
+    final $$FavoriteModelTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $state.db.favoriteModel,
+        getReferencedColumn: (t) => t.bookId,
+        builder: (joinBuilder, parentComposers) =>
+            $$FavoriteModelTableFilterComposer(ComposerState($state.db,
+                $state.db.favoriteModel, joinBuilder, parentComposers)));
+    return f(composer);
+  }
 }
 
 class $$BooksModelTableOrderingComposer
@@ -1468,6 +1613,11 @@ class $$BooksModelTableOrderingComposer
       column: $state.table.pdfPath,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get upload_by => $state.composableBuilder(
+      column: $state.table.upload_by,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 class $$BooksModelTableTableManager extends RootTableManager<
@@ -1478,9 +1628,9 @@ class $$BooksModelTableTableManager extends RootTableManager<
     $$BooksModelTableOrderingComposer,
     $$BooksModelTableCreateCompanionBuilder,
     $$BooksModelTableUpdateCompanionBuilder,
-    (Books, BaseReferences<_$AppDatabase, $BooksModelTable, Books>),
+    (Books, $$BooksModelTableReferences),
     Books,
-    PrefetchHooks Function()> {
+    PrefetchHooks Function({bool favoriteModelRefs})> {
   $$BooksModelTableTableManager(_$AppDatabase db, $BooksModelTable table)
       : super(TableManagerState(
           db: db,
@@ -1497,6 +1647,7 @@ class $$BooksModelTableTableManager extends RootTableManager<
             Value<String> description = const Value.absent(),
             Value<String> coverPath = const Value.absent(),
             Value<String> pdfPath = const Value.absent(),
+            Value<String> upload_by = const Value.absent(),
           }) =>
               BooksModelCompanion(
             id: id,
@@ -1506,6 +1657,7 @@ class $$BooksModelTableTableManager extends RootTableManager<
             description: description,
             coverPath: coverPath,
             pdfPath: pdfPath,
+            upload_by: upload_by,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
@@ -1515,6 +1667,7 @@ class $$BooksModelTableTableManager extends RootTableManager<
             required String description,
             required String coverPath,
             required String pdfPath,
+            required String upload_by,
           }) =>
               BooksModelCompanion.insert(
             id: id,
@@ -1524,11 +1677,39 @@ class $$BooksModelTableTableManager extends RootTableManager<
             description: description,
             coverPath: coverPath,
             pdfPath: pdfPath,
+            upload_by: upload_by,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map((e) => (
+                    e.readTable(table),
+                    $$BooksModelTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({favoriteModelRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (favoriteModelRefs) db.favoriteModel
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (favoriteModelRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$BooksModelTableReferences
+                            ._favoriteModelRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$BooksModelTableReferences(db, table, p0)
+                                .favoriteModelRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.bookId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
@@ -1540,9 +1721,9 @@ typedef $$BooksModelTableProcessedTableManager = ProcessedTableManager<
     $$BooksModelTableOrderingComposer,
     $$BooksModelTableCreateCompanionBuilder,
     $$BooksModelTableUpdateCompanionBuilder,
-    (Books, BaseReferences<_$AppDatabase, $BooksModelTable, Books>),
+    (Books, $$BooksModelTableReferences),
     Books,
-    PrefetchHooks Function()>;
+    PrefetchHooks Function({bool favoriteModelRefs})>;
 typedef $$FavoriteModelTableCreateCompanionBuilder = FavoriteModelCompanion
     Function({
   Value<int> id,
@@ -1556,6 +1737,39 @@ typedef $$FavoriteModelTableUpdateCompanionBuilder = FavoriteModelCompanion
   Value<int> userId,
 });
 
+final class $$FavoriteModelTableReferences
+    extends BaseReferences<_$AppDatabase, $FavoriteModelTable, favorites> {
+  $$FavoriteModelTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $BooksModelTable _bookIdTable(_$AppDatabase db) =>
+      db.booksModel.createAlias(
+          $_aliasNameGenerator(db.favoriteModel.bookId, db.booksModel.id));
+
+  $$BooksModelTableProcessedTableManager? get bookId {
+    if ($_item.bookId == null) return null;
+    final manager = $$BooksModelTableTableManager($_db, $_db.booksModel)
+        .filter((f) => f.id($_item.bookId!));
+    final item = $_typedResult.readTableOrNull(_bookIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $UsersTable _userIdTable(_$AppDatabase db) => db.users
+      .createAlias($_aliasNameGenerator(db.favoriteModel.userId, db.users.id));
+
+  $$UsersTableProcessedTableManager? get userId {
+    if ($_item.userId == null) return null;
+    final manager = $$UsersTableTableManager($_db, $_db.users)
+        .filter((f) => f.id($_item.userId!));
+    final item = $_typedResult.readTableOrNull(_userIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
 class $$FavoriteModelTableFilterComposer
     extends FilterComposer<_$AppDatabase, $FavoriteModelTable> {
   $$FavoriteModelTableFilterComposer(super.$state);
@@ -1564,15 +1778,29 @@ class $$FavoriteModelTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<int> get bookId => $state.composableBuilder(
-      column: $state.table.bookId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  $$BooksModelTableFilterComposer get bookId {
+    final $$BooksModelTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.bookId,
+        referencedTable: $state.db.booksModel,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) =>
+            $$BooksModelTableFilterComposer(ComposerState($state.db,
+                $state.db.booksModel, joinBuilder, parentComposers)));
+    return composer;
+  }
 
-  ColumnFilters<int> get userId => $state.composableBuilder(
-      column: $state.table.userId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  $$UsersTableFilterComposer get userId {
+    final $$UsersTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.userId,
+        referencedTable: $state.db.users,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) => $$UsersTableFilterComposer(
+            ComposerState(
+                $state.db, $state.db.users, joinBuilder, parentComposers)));
+    return composer;
+  }
 }
 
 class $$FavoriteModelTableOrderingComposer
@@ -1583,15 +1811,29 @@ class $$FavoriteModelTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<int> get bookId => $state.composableBuilder(
-      column: $state.table.bookId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  $$BooksModelTableOrderingComposer get bookId {
+    final $$BooksModelTableOrderingComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.bookId,
+        referencedTable: $state.db.booksModel,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) =>
+            $$BooksModelTableOrderingComposer(ComposerState($state.db,
+                $state.db.booksModel, joinBuilder, parentComposers)));
+    return composer;
+  }
 
-  ColumnOrderings<int> get userId => $state.composableBuilder(
-      column: $state.table.userId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  $$UsersTableOrderingComposer get userId {
+    final $$UsersTableOrderingComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.userId,
+        referencedTable: $state.db.users,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) => $$UsersTableOrderingComposer(
+            ComposerState(
+                $state.db, $state.db.users, joinBuilder, parentComposers)));
+    return composer;
+  }
 }
 
 class $$FavoriteModelTableTableManager extends RootTableManager<
@@ -1602,9 +1844,9 @@ class $$FavoriteModelTableTableManager extends RootTableManager<
     $$FavoriteModelTableOrderingComposer,
     $$FavoriteModelTableCreateCompanionBuilder,
     $$FavoriteModelTableUpdateCompanionBuilder,
-    (favorites, BaseReferences<_$AppDatabase, $FavoriteModelTable, favorites>),
+    (favorites, $$FavoriteModelTableReferences),
     favorites,
-    PrefetchHooks Function()> {
+    PrefetchHooks Function({bool bookId, bool userId})> {
   $$FavoriteModelTableTableManager(_$AppDatabase db, $FavoriteModelTable table)
       : super(TableManagerState(
           db: db,
@@ -1634,9 +1876,55 @@ class $$FavoriteModelTableTableManager extends RootTableManager<
             userId: userId,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map((e) => (
+                    e.readTable(table),
+                    $$FavoriteModelTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({bookId = false, userId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (bookId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.bookId,
+                    referencedTable:
+                        $$FavoriteModelTableReferences._bookIdTable(db),
+                    referencedColumn:
+                        $$FavoriteModelTableReferences._bookIdTable(db).id,
+                  ) as T;
+                }
+                if (userId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.userId,
+                    referencedTable:
+                        $$FavoriteModelTableReferences._userIdTable(db),
+                    referencedColumn:
+                        $$FavoriteModelTableReferences._userIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
         ));
 }
 
@@ -1648,9 +1936,9 @@ typedef $$FavoriteModelTableProcessedTableManager = ProcessedTableManager<
     $$FavoriteModelTableOrderingComposer,
     $$FavoriteModelTableCreateCompanionBuilder,
     $$FavoriteModelTableUpdateCompanionBuilder,
-    (favorites, BaseReferences<_$AppDatabase, $FavoriteModelTable, favorites>),
+    (favorites, $$FavoriteModelTableReferences),
     favorites,
-    PrefetchHooks Function()>;
+    PrefetchHooks Function({bool bookId, bool userId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

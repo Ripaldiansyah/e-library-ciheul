@@ -24,6 +24,8 @@ mixin _$EditBookState {
   set isLoading(bool value) => throw _privateConstructorUsedError;
   String? get pathPdf => throw _privateConstructorUsedError;
   set pathPdf(String? value) => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  set id(int? value) => throw _privateConstructorUsedError;
   String? get pathCover => throw _privateConstructorUsedError;
   set pathCover(String? value) => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
@@ -32,6 +34,8 @@ mixin _$EditBookState {
   set author(String? value) => throw _privateConstructorUsedError;
   int? get category => throw _privateConstructorUsedError;
   set category(int? value) => throw _privateConstructorUsedError;
+  String? get categorySelected => throw _privateConstructorUsedError;
+  set categorySelected(String? value) => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   set description(String? value) => throw _privateConstructorUsedError;
 
@@ -52,10 +56,12 @@ abstract class $EditBookStateCopyWith<$Res> {
       {List<Map<String, dynamic>>? categories,
       bool isLoading,
       String? pathPdf,
+      int? id,
       String? pathCover,
       String? title,
       String? author,
       int? category,
+      String? categorySelected,
       String? description});
 }
 
@@ -77,10 +83,12 @@ class _$EditBookStateCopyWithImpl<$Res, $Val extends EditBookState>
     Object? categories = freezed,
     Object? isLoading = null,
     Object? pathPdf = freezed,
+    Object? id = freezed,
     Object? pathCover = freezed,
     Object? title = freezed,
     Object? author = freezed,
     Object? category = freezed,
+    Object? categorySelected = freezed,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
@@ -96,6 +104,10 @@ class _$EditBookStateCopyWithImpl<$Res, $Val extends EditBookState>
           ? _value.pathPdf
           : pathPdf // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       pathCover: freezed == pathCover
           ? _value.pathCover
           : pathCover // ignore: cast_nullable_to_non_nullable
@@ -112,6 +124,10 @@ class _$EditBookStateCopyWithImpl<$Res, $Val extends EditBookState>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as int?,
+      categorySelected: freezed == categorySelected
+          ? _value.categorySelected
+          : categorySelected // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -132,10 +148,12 @@ abstract class _$$EditBookStateImplCopyWith<$Res>
       {List<Map<String, dynamic>>? categories,
       bool isLoading,
       String? pathPdf,
+      int? id,
       String? pathCover,
       String? title,
       String? author,
       int? category,
+      String? categorySelected,
       String? description});
 }
 
@@ -155,10 +173,12 @@ class __$$EditBookStateImplCopyWithImpl<$Res>
     Object? categories = freezed,
     Object? isLoading = null,
     Object? pathPdf = freezed,
+    Object? id = freezed,
     Object? pathCover = freezed,
     Object? title = freezed,
     Object? author = freezed,
     Object? category = freezed,
+    Object? categorySelected = freezed,
     Object? description = freezed,
   }) {
     return _then(_$EditBookStateImpl(
@@ -174,6 +194,10 @@ class __$$EditBookStateImplCopyWithImpl<$Res>
           ? _value.pathPdf
           : pathPdf // ignore: cast_nullable_to_non_nullable
               as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       pathCover: freezed == pathCover
           ? _value.pathCover
           : pathCover // ignore: cast_nullable_to_non_nullable
@@ -190,6 +214,10 @@ class __$$EditBookStateImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as int?,
+      categorySelected: freezed == categorySelected
+          ? _value.categorySelected
+          : categorySelected // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -205,10 +233,12 @@ class _$EditBookStateImpl implements _EditBookState {
       {this.categories = null,
       this.isLoading = true,
       this.pathPdf = null,
+      this.id = null,
       this.pathCover = null,
       this.title = null,
       this.author = null,
       this.category = null,
+      this.categorySelected = null,
       this.description = null});
 
   @override
@@ -220,6 +250,9 @@ class _$EditBookStateImpl implements _EditBookState {
   @override
   @JsonKey()
   String? pathPdf;
+  @override
+  @JsonKey()
+  int? id;
   @override
   @JsonKey()
   String? pathCover;
@@ -234,11 +267,14 @@ class _$EditBookStateImpl implements _EditBookState {
   int? category;
   @override
   @JsonKey()
+  String? categorySelected;
+  @override
+  @JsonKey()
   String? description;
 
   @override
   String toString() {
-    return 'EditBookState(categories: $categories, isLoading: $isLoading, pathPdf: $pathPdf, pathCover: $pathCover, title: $title, author: $author, category: $category, description: $description)';
+    return 'EditBookState(categories: $categories, isLoading: $isLoading, pathPdf: $pathPdf, id: $id, pathCover: $pathCover, title: $title, author: $author, category: $category, categorySelected: $categorySelected, description: $description)';
   }
 
   /// Create a copy of EditBookState
@@ -255,10 +291,12 @@ abstract class _EditBookState implements EditBookState {
       {List<Map<String, dynamic>>? categories,
       bool isLoading,
       String? pathPdf,
+      int? id,
       String? pathCover,
       String? title,
       String? author,
       int? category,
+      String? categorySelected,
       String? description}) = _$EditBookStateImpl;
 
   @override
@@ -271,6 +309,9 @@ abstract class _EditBookState implements EditBookState {
   String? get pathPdf;
   set pathPdf(String? value);
   @override
+  int? get id;
+  set id(int? value);
+  @override
   String? get pathCover;
   set pathCover(String? value);
   @override
@@ -282,6 +323,9 @@ abstract class _EditBookState implements EditBookState {
   @override
   int? get category;
   set category(int? value);
+  @override
+  String? get categorySelected;
+  set categorySelected(String? value);
   @override
   String? get description;
   set description(String? value);

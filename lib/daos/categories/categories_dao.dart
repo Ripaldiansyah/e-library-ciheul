@@ -25,6 +25,17 @@ class CategoriesDao extends DatabaseAccessor<AppDatabase>
     }).toList();
   }
 
+  Future getCategoryById(id) async {
+    try {
+      final category = await (select(categories)
+            ..where((tbl) => tbl.id.equals(id)))
+          .getSingle();
+      return category;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future insertCategory(Insertable<Category> category) async {
     try {
       await transaction(() async {

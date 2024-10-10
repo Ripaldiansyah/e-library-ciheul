@@ -22,6 +22,7 @@ import 'module/intro/controller/intro_controller.dart' as _i1033;
 import 'module/list_book/controller/list_book_controller.dart' as _i1001;
 import 'module/main_navigation/controller/main_navigation_controller.dart'
     as _i164;
+import 'module/pdf_view/controller/pdf_view_controller.dart' as _i387;
 import 'module/profile/controller/profile_controller.dart' as _i913;
 import 'module/search_book/controller/search_book_controller.dart' as _i393;
 import 'module/splash/controller/splash_controller.dart' as _i827;
@@ -53,6 +54,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i1001.ListBookController>(() => _i1001.ListBookController());
     gh.singleton<_i164.MainNavigationController>(
         () => _i164.MainNavigationController());
+    gh.singleton<_i387.PdfViewController>(() => _i387.PdfViewController());
     gh.singleton<_i913.ProfileController>(() => _i913.ProfileController());
     gh.singleton<_i393.SearchBookController>(
         () => _i393.SearchBookController());
