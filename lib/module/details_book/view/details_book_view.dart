@@ -154,7 +154,9 @@ class _DetailsBookViewState extends State<DetailsBookView> {
                             IconButton(
                               onPressed: () {
                                 controller.deleteBook(widget.book.id);
-                                widget.fetchData ?? ();
+                                if (widget.fetchData != null) {
+                                  widget.fetchData!();
+                                }
                               },
                               icon: Icon(
                                 Icons.delete,

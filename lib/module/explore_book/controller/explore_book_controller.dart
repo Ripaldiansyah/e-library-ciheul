@@ -24,7 +24,7 @@ class ExploreBookController extends Cubit<ExploreBookState>
   @override
   void ready() {}
 
-  getGategories() async {
+  getCategories() async {
     try {
       final db = await DatabaseHelper().database;
       final categoriesDao = CategoriesDao(db);
