@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: defaultTheme(),
-      home: IntroView(),
+      home: SplashView(),
     );
   }
 }

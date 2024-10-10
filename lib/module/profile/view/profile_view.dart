@@ -100,7 +100,7 @@ class _ProfileViewState extends State<ProfileView> {
                 Positioned(
                   bottom: 0,
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 180,
+                    height: MediaQuery.of(context).size.height - 220,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
