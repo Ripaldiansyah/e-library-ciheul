@@ -1,6 +1,7 @@
 import 'package:bcrypt/bcrypt.dart';
 import 'package:drift/drift.dart';
 import 'package:e_library_ciheul/database/app_database.dart';
+import 'package:e_library_ciheul/shared/util/db_service/db_service.dart';
 
 import '../../models/user_model.dart';
 
@@ -16,6 +17,9 @@ class UserDao extends DatabaseAccessor<AppDatabase> with _$UserDaoMixin {
         .getSingleOrNull();
 
     if (user != null && BCrypt.checkpw(password, user.password)) {
+      DBService.set("userId", user.id.toString());
+      DBService.set("name", user.name);
+      DBService.set("email", user.email);
       return true;
     } else {
       throw Exception('Invalid email or password');

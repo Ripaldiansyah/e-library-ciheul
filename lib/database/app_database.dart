@@ -2,15 +2,21 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:e_library_ciheul/daos/books/books_dao.dart';
 import 'package:e_library_ciheul/daos/categories/categories_dao.dart';
+import 'package:e_library_ciheul/models/books_model.dart';
 import 'package:e_library_ciheul/models/categories_model.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:e_library_ciheul/daos/user/user_dao.dart';
+import '../daos/favorites/favorites_dao.dart';
+import '../models/favorite_model.dart';
 import '../models/user_model.dart';
 part 'app_database.g.dart';
 
-@DriftDatabase(tables: [Users, Categories], daos: [UserDao, CategoriesDao])
+@DriftDatabase(
+    tables: [Users, Categories, BooksModel, FavoriteModel],
+    daos: [UserDao, CategoriesDao, BooksDao, FavoritesDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase(NativeDatabase db) : super(db);
 

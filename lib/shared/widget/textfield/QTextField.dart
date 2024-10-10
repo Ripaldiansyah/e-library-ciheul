@@ -59,6 +59,16 @@ class _QTextFieldState extends State<QTextField> {
     super.initState();
   }
 
+  @override
+  void didUpdateWidget(covariant QTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.value != widget.value) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        textEditingController.text = widget.value ?? '';
+      });
+    }
+  }
+
   String getValue() {
     return textEditingController.text;
   }

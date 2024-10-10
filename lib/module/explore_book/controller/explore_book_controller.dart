@@ -1,4 +1,4 @@
-import 'package:e_library_ciheul/daos/categories/categories_dao.dart';
+import 'package:e_library_ciheul/daos/books/books_dao.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core.dart';
 import '../state/explore_book_state.dart';
@@ -46,5 +46,9 @@ class ExploreBookController extends Cubit<ExploreBookState>
 
   uploadBook() {
     Get.to(UploadBookView());
+  }
+
+  addCategory() {
+    Get.to(AddCategoryView());
   }
 }

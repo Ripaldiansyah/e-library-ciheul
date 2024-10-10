@@ -8,7 +8,10 @@ import 'package:e_library_ciheul/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+import 'shared/util/db_service/db_service.dart';
+
+void main() async {
+  await DBService.init();
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

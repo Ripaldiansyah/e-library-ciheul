@@ -2,17 +2,18 @@
     "modules": [
         "auth/login",
         "auth/register",
-        "admin/upload_book",
-        "admin/edit_book",
-        "admin/detail_book",
-        "admin/admin_menu",
         "splash",
         "intro",
         "main_navigation",
         "explore_book",
         "search_book",
         "favorite_book",
-        "profile"
+        "profile",
+        "upload_book",
+        "edit_book",
+        "details_book",
+        "list_book",
+        "add_category"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

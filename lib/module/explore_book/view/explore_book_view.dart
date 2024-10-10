@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_library_ciheul/module/explore_book/widget/add_new.dart';
 import 'package:e_library_ciheul/module/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +96,20 @@ class _ExploreBookViewState extends State<ExploreBookView> {
                                 physics: const ScrollPhysics(),
                                 itemBuilder: (BuildContext context, int index) {
                                   var item = state.categories![index];
+                                  ImageProvider<Object> imageCover =
+                                      item.image.contains('assets/categories')
+                                          ? AssetImage(
+                                              item.image,
+                                            )
+                                          : FileImage(
+                                              File(item.image),
+                                            );
                                   return InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Get.to(ListBookView(
+                                        categories: item,
+                                      ));
+                                    },
                                     child: Container(
                                       clipBehavior: Clip.antiAlias,
                                       decoration: BoxDecoration(
@@ -105,9 +119,7 @@ class _ExploreBookViewState extends State<ExploreBookView> {
                                           ),
                                         ),
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                            item.image,
-                                          ),
+                                          image: imageCover,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -194,7 +206,9 @@ class _ExploreBookViewState extends State<ExploreBookView> {
                           ),
                           AddNew(
                             label: "Tambah Kategori",
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.addCategory();
+                            },
                           ),
                         ],
                       ),
