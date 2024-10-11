@@ -40,15 +40,19 @@ Aplikasi e-Library ini dirancang untuk memberikan pengalaman membaca yang intuit
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/Ripaldiansyah/e-library-ciheul.git
 
    ```
+
 2. Navigate to the project folder:
+
    ```bash
    cd e-library-ciheul
 
    ```
+
 3. Open with vscode:
    ```bash
    code .
@@ -94,38 +98,38 @@ Aplikasi e-Library ini dirancang untuk memberikan pengalaman membaca yang intuit
 ![Intro](assets/screenshots/Intro.jpg)
 _Gambar 1: Tampilan Intro_
 
-![Explore by Kategori](assets/screenshots/explore by kategori.jpg)
+![Explore by Kategori](assets/screenshots/explore-by-category.jpg)
 _Gambar 2: Menjelajahi Buku Berdasarkan Kategori_
 
-![Sign In](assets/screenshots/Sign in.jpg)
+![Sign In](assets/screenshots/Sign-in.jpg)
 _Gambar 3: Halaman Sign In_
 
 ![Explore](assets/screenshots/explore.jpg)
 _Gambar 4: Halaman Explore_
 
-![Sign Up](assets/screenshots/Sign up.jpg)
+![Sign Up](assets/screenshots/Sign-up.jpg)
 _Gambar 5: Halaman Sign Up_
 
-![Tidak Ada Buku](assets/screenshots/jika tidak ada buku dengan kategori dipilih.jpg)
+![Tidak Ada Buku](assets/screenshots/explore-with-category2.jpg)
 _Gambar 6: Tidak Ada Buku dengan Kategori Dipilih_
 
-![Add Kategori](assets/screenshots/add categori.jpg)
+![Add Kategori](assets/screenshots/add-categori.jpg)
 _Gambar 7: Menambahkan Kategori_
 
 ![Profile](assets/screenshots/profile.jpg)
 _Gambar 8: Halaman Profil_
 
-![Daftar Favorit](assets/screenshots/daftar favorite.jpg)
+![Daftar Favorit](assets/screenshots/daftar-favorite.jpg)
 _Gambar 9: Daftar Buku Favorit_
 
 ![Search](assets/screenshots/search.jpg)
 _Gambar 10: Fitur Pencarian Buku_
 
-![Detail Book](assets/screenshots/detail book.jpg)
+![Detail Book](assets/screenshots/detail-book.jpg)
 _Gambar 11: Detail Buku_
 
-![Upload Book](assets/screenshots/upload book.jpg)
+![Upload Book](assets/screenshots/upload-book.jpg)
 _Gambar 12: Mengunggah Buku_
 
-![Edit Book](assets/screenshots/edit book.jpg)
+![Edit Book](assets/screenshots/edit-book.jpg)
 _Gambar 13: Mengedit Buku_
